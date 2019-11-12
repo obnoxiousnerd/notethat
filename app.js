@@ -1,9 +1,15 @@
+const header = document.querySelector('#header')
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
 SpeechRecognition.isFinal = true
 const recognition = new SpeechRecognition()
 const talk = document.querySelector('#talk')
+const music = document.querySelector('#music')
+const musicbtn = document.querySelector('#musicbtn')
 const stop = document.querySelector('#stop')
+const read = document.querySelector('#readloud')
 const editor = document.querySelector('#editor')
+setTimeout(()=>{header.style.fontSize = '0px'}, 5000)
+let isPaused = 0
 recognition.onresult = (res)=>{
    const transcript = res.results[0][0].transcript
    console.log(transcript);
@@ -35,3 +41,35 @@ function getFile(){
    anchor.click();
    document.body.removeChild(anchor);
 }
+const readLoud = (message) =>{
+   const speech = new SpeechSynthesisUtterance();
+   speech.text = message;
+   speech.volume = 1;
+   speech.rate = 1;
+   speech.lang = 'en-US'
+   speech.pitch = 1;
+   window.speechSynthesis.speak(speech);
+   handleBGmusic(speech)
+   
+}
+musicbtn.addEventListener('click', ()=>{
+   if(!music.paused){music.pause(); 
+      isPaused = 1;
+      musicbtn.querySelector('i').removeAttribute('class'); 
+      musicbtn.querySelector('i').setAttribute('class', 'fal fa-music')
+   }
+   else if(music.paused){music.play(); 
+      isPaused = 0; 
+      musicbtn.querySelector('i').removeAttribute('class');
+      musicbtn.querySelector('i').setAttribute('class', 'fal fa-music-slash')
+   }
+})
+const handleBGmusic = (speech)=>{
+   if(!music.paused)music.pause()
+   speech.addEventListener('end', ()=>{
+      if(isPaused === 0)music.play()
+   })
+}
+read.addEventListener('click', ()=>{
+   readLoud(editor.value)
+})

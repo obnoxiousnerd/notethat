@@ -5,49 +5,17 @@
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <meta http-equiv="X-UA-Compatible" content="ie=edge">
    <title>NoteThat</title>
-   <style>
-      body{
-         text-align: center;
-         transition: background 2s ease-in-out;
-         font-family: 'Open Sans', sans-serif;
-      }
-   #editor{
-      transition: background 2s ease-in-out;
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-      width: 80%;
-      height: 80vh;
-      font-size: 5vh;
-      border: 10px groove rgb(99, 99, 99);
-      border-radius:10px ;
-      resize: none;
-      text-align: justify;
-      overflow: scroll;
-   }
-   #editor:focus, button:focus{
-      outline: none;
-   }
-   button{
-      background-color: rgb(30, 204, 175);
-      color: rgb(124, 124, 124);
-      padding: 10px;
-      border: 0px;
-      font-size: 4vh;
-      border-radius: 10px;
-      transition: .5s ease-in-out;
-   }
-   button:hover{
-      background-color: rgb(124, 124, 124);
-      color: rgb(30, 204, 175);
-   }
-   </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+   <h1 id = 'header'>This is the NoteThat Editor. Work, Study, make it read or anything. Work on and download, Distraction free. Background music for some upbeat.</h1>
    <button id ="talk" onclick="recognition.start()"><i class="fal fa-microphone"></i></button>
    <button id ="stop"><i class="fal fa-microphone-slash"></i></button>
+   <button id ="readloud"><i class="fal fa-user-music"></i></button>
+   <button id ="musicbtn"><i class="fal fa-music"></i></button>
    <textarea id="editor" cols="30" rows="10"></textarea>
    <button onclick="getFile()">Download Your Work</button>
+   <audio id='music' src="music/background.mp3" hidden='true' loop></audio>
    <script src="app.js"></script>
    <link rel="stylesheet" href="https://obnoxiousnerd.github.io/cdn/fontawesome/css/all.min.css">
 </body>
